@@ -268,7 +268,36 @@ def DrawGLScene():
     glTexCoord2f(0.5,1.0); glVertex3f(-0.29,0.45,1.5001)
     glEnd()
 
-  
+    glBegin(GL_QUADS)
+    #JANELA DIREITA
+    glTexCoord2f(0.0,1.0); glVertex3f(1.0001,0.43, 0.28)   
+    glTexCoord2f(0.0,0.0); glVertex3f(1.0001,1.19, 0.28)   
+    glTexCoord2f(0.5,0.0); glVertex3f(1.0001,1.19,-0.23)  
+    glTexCoord2f(0.5,1.0); glVertex3f(1.0001,0.43,-0.23)
+    glEnd()
+
+    glBegin(GL_QUADS)
+    #JANELA TRASEIRA
+    glTexCoord2f(0.0,1.0); glVertex3f(-0.69,0.43,-1.5001)      
+    glTexCoord2f(0.0,0.0); glVertex3f(-0.69,1.19,-1.5001)     
+    glTexCoord2f(0.5,0.0); glVertex3f(-0.29,1.19,-1.5001)  
+    glTexCoord2f(0.5,1.0); glVertex3f(-0.29,0.43,-1.5001)  
+    glEnd()
+
+    glBegin(GL_QUADS)
+    #JANELA PEQUENA FRENTE
+    glTexCoord2f(0.0,1.0); glVertex3f( 0.09,2.22,1.5001)
+    glTexCoord2f(0.0,0.0); glVertex3f( 0.09,2.51,1.5001)
+    glTexCoord2f(0.5,0.0); glVertex3f(-0.09,2.51,1.5001)
+    glTexCoord2f(0.5,1.0); glVertex3f(-0.09,2.22,1.5001)    
+    glEnd()
+    
+
+#    glBegin(GL_QUADS)
+#    #DEGRAU
+
+
+
     glutSwapBuffers()
 
 
