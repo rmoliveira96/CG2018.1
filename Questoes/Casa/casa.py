@@ -21,7 +21,7 @@ dz = 0
 
 def LoadTextures():
     global texture
-    texture = glGenTextures(4) #Carregando 4 texturas
+    texture = glGenTextures(6) #Carregando 6 texturas
 
    #Textura fundo e esquerda ################################################################################
     glBindTexture(GL_TEXTURE_2D, texture[0])
@@ -80,9 +80,47 @@ def LoadTextures():
     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL)
     ################################################################################
 
-   #Textura do chao ################################################################################
+   #Textura do chao     ################################################################################
     glBindTexture(GL_TEXTURE_2D, texture[3])
     reader = png.Reader(filename='base.png')
+    w, h, pixels, metadata = reader.read_flat()
+    if(metadata['alpha']):
+        modo = GL_RGBA
+    else:
+        modo = GL_RGB
+    glPixelStorei(GL_UNPACK_ALIGNMENT,1)
+    glTexImage2D(GL_TEXTURE_2D, 0, modo, w, h, 0, modo, GL_UNSIGNED_BYTE, pixels.tolist())
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP)
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP)
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT)
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT)
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST)
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST)
+    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL)
+    ################################################################################
+
+   #Textura da porta      ################################################################################
+    glBindTexture(GL_TEXTURE_2D, texture[4])
+    reader = png.Reader(filename='porta.png')
+    w, h, pixels, metadata = reader.read_flat()
+    if(metadata['alpha']):
+        modo = GL_RGBA
+    else:
+        modo = GL_RGB
+    glPixelStorei(GL_UNPACK_ALIGNMENT,1)
+    glTexImage2D(GL_TEXTURE_2D, 0, modo, w, h, 0, modo, GL_UNSIGNED_BYTE, pixels.tolist())
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP)
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP)
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT)
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT)
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST)
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST)
+    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL)
+    ################################################################################
+
+   #Textura da porta      ################################################################################
+    glBindTexture(GL_TEXTURE_2D, texture[5])
+    reader = png.Reader(filename='janelaDupla.png')
     w, h, pixels, metadata = reader.read_flat()
     if(metadata['alpha']):
         modo = GL_RGBA
@@ -204,6 +242,33 @@ def DrawGLScene():
     glTexCoord2f(1.0,1.0); glVertex3f(1.6,0.0,2.4)   
     glEnd()
 
+    glBindTexture(GL_TEXTURE_2D, texture[4])
+    glBegin(GL_QUADS)
+    #PORTA
+    glTexCoord2f(0.0,1.0); glVertex3f(0.24,0.09,1.5001)      
+    glTexCoord2f(0.0,0.0); glVertex3f(0.24,1.18,1.5001)   
+    glTexCoord2f(1.0,0.0); glVertex3f(0.73,1.18,1.5001)      
+    glTexCoord2f(1.0,1.0); glVertex3f(0.73,0.09,1.5001)   
+    glEnd()
+
+    glBindTexture(GL_TEXTURE_2D, texture[5])
+    glBegin(GL_QUADS)
+    #JANELA GRANDE
+    glTexCoord2f(0.0,1.0); glVertex3f(-1.0001,0.42,0.48)      
+    glTexCoord2f(0.0,0.0); glVertex3f(-1.0001,1.20,0.48)   
+    glTexCoord2f(1.0,0.0); glVertex3f(-1.0001,1.20,-0.6)      
+    glTexCoord2f(1.0,1.0); glVertex3f(-1.0001,0.42,-0.6)   
+    glEnd()
+
+    glBegin(GL_QUADS)
+    #JANELA FRENTE
+    glTexCoord2f(0.0,1.0); glVertex3f(-0.69,0.45,1.5001)      
+    glTexCoord2f(0.0,0.0); glVertex3f(-0.69,1.20,1.5001)   
+    glTexCoord2f(0.5,0.0); glVertex3f(-0.29,1.20,1.5001)      
+    glTexCoord2f(0.5,1.0); glVertex3f(-0.29,0.45,1.5001)
+    glEnd()
+
+  
     glutSwapBuffers()
 
 
