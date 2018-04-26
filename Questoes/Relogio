@@ -1,0 +1,25 @@
+void setup() {
+  int raio = 300;
+  size(raio*2, raio*2);
+  stroke(255);
+  smooth();
+}
+void draw() {
+  int raio = 300;
+  background(0);
+  fill(80);
+  noStroke();
+
+  ellipse(raio, raio, raio*1.5 , raio*1.5);
+  float s = map(second(), 0, 60, 0, TWO_PI) - HALF_PI;
+  float m = map(minute(), 0, 60, 0, TWO_PI) + (s/60) - HALF_PI;
+  float h = map(hour() % 12, 0, 12, 0, TWO_PI) + (m/60) - HALF_PI;
+  stroke(255);
+
+  strokeWeight(3);
+  line(raio, raio, cos(s)*(raio/1.5) + raio, sin(s)*(raio/1.5) + raio);
+  strokeWeight(5);
+  line(raio, raio, cos(m)*(raio/2.0) + raio, sin(m)*(raio/2.0) + raio);
+  strokeWeight(7);
+  line(raio, raio, cos(h)*(raio/2.5) + raio, sin(h)*(raio/2.5) + raio);
+}
